@@ -1,7 +1,7 @@
 package model;
 
 public abstract class EntiteReservable<P extends Formulaire> {
-	private CalendrierAnnuel calendrierPersonnel = new CalendrierAnnuel();
+	protected CalendrierAnnuel calendrierPersonnel = new CalendrierAnnuel();
 	private int numero;
 
 	public int getNumero() {
