@@ -1,24 +1,24 @@
 package model;
 
-public class CentraleDeReservation <P extends Formulaire> {
-	private EntiteReservable<P>[] entitesAReserver;
+public class CentraleDeReservation <E extends EntiteReservable<F>, F extends Formulaire> {
+	private E[] entitesAReserver;
 	private int nbEntite=0;
 	
-	public CentraleDeReservation(EntiteReservable<P>[] entitesAReserver) {
+	public CentraleDeReservation(E[] entitesAReserver) {
 		this.entitesAReserver = entitesAReserver;
 	}
 	
-	public int ajouterEntite(EntiteReservable<P> entite) {
+	public int ajouterEntite(E entite) {
 		entitesAReserver[nbEntite]=entite;
 		nbEntite++;
 		entite.setNumero(nbEntite);
 		return nbEntite;
 	}
 	
-	public int[] donnerPossibilites(P formulaire) {
+	public int[] donnerPossibilites(F formulaire) {
 		int[] disponibilite = new int[nbEntite];
 		for(int i=0;i<nbEntite;i++) {
-			if(entitesAReserver[i].compatible(formulaire)) {
+			if(entitesAReserver[i].compatible(formulaire) && entitesAReserver[i].estLibre(formulaire)) {
 				disponibilite[i]=entitesAReserver[i].getNumero();
 			}
 			else {
@@ -28,8 +28,8 @@ public class CentraleDeReservation <P extends Formulaire> {
 		return disponibilite;
 	}
 	
-	public Reservation reserver(int num,P formulaire) {
-		EntiteReservable<P> entite=null;
+	public Reservation reserver(int num,F formulaire) {
+		E entite=null;
 		int i=0;
 		do {
 			if(entitesAReserver[i].getNumero()==num)

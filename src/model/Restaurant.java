@@ -4,7 +4,7 @@ public class Restaurant {
 	
 	private static final int NB_TABLE_MAX=10;
 	
-	private CentraleDeReservation<FormulaireRestaurant> centrale;
+	private CentraleDeReservation<EntiteReservable<FormulaireRestaurant>,FormulaireRestaurant> centrale;
 	
 	private static class Table extends EntiteReservable<FormulaireRestaurant> {
 
@@ -21,10 +21,10 @@ public class Restaurant {
 			int nbChaiseVoulue=formulaire.nombrePersonnes;
 			boolean compatibleChaise= nbChaiseVoulue==nbChaises || nbChaiseVoulue==(nbChaises-1);
 			if(formulaire.getNumService()==1) {
-				return compatibleChaise && super.estLibre(formulaire);
+				return compatibleChaise;
 			}
 			else{
-				return compatibleChaise && calendrierDeuxiemeService.estLibre(formulaire.getJour(), formulaire.getMois());
+				return compatibleChaise;
 			}
 		}
 		
