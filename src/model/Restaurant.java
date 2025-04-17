@@ -37,8 +37,7 @@ public class Restaurant {
 				else {
 					calendrierDeuxiemeService.reserver(formulaire.getJour(), formulaire.getMois());
 				}
-				Reservation reservation = new ReservationRestaurant(formulaire.getJour(), formulaire.getMois(), formulaire.getNumService(), super.getNumero());
-				return reservation;
+				return new ReservationRestaurant(formulaire.getJour(), formulaire.getMois(), formulaire.getNumService(), super.getNumero());
 			}
 			else return null;
 		}
